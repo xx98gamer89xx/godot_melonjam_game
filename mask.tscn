@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqrhrkw58kpta"]
+
+[ext_resource type="Script" uid="uid://c266n6cmpfyg5" path="res://mask.gd" id="1_oilhy"]
+[ext_resource type="Texture2D" uid="uid://jpclvx0a180g" path="res://icon.svg" id="2_1rsgv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yek2"]
+size = Vector2(64, 42)
+
+[node name="mask" type="Area2D" groups=["masks"]]
+script = ExtResource("1_oilhy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.515625, 0.328125)
+texture = ExtResource("2_1rsgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8yek2")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgwcue41o4m6"]
+
+[ext_resource type="Script" uid="uid://dto7ambie31ms" path="res://knife.gd" id="1_mawn3"]
+[ext_resource type="Texture2D" uid="uid://jpclvx0a180g" path="res://icon.svg" id="2_8wt88"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_pughu"]
+points = PackedVector2Array(0, -70, 50, -50, 70, 0, 50, 50, 0, 70)
+
+[node name="knife" type="Area2D" groups=["items"]]
+script = ExtResource("1_mawn3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_pughu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8wt88")
+
+[node name="time" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="time" to="." method="_on_time_timeout"]

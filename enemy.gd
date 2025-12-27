@@ -28,6 +28,10 @@ func _process(delta):
 			can_see = false
 	## Movement forward
 	if health <= 0:
+		var mask_instance = load("res://mask.tscn").instantiate()
+		mask_instance.position = position
+		mask_instance.mask = mask
+		add_sibling(mask_instance)
 		queue_free()
 	W = _movement_axis()[0]
 	velocity += W.normalized()

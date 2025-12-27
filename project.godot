@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 items=""
 objectives=""
 masks=""
+doors=""
+openers=""
 
 [input]
 

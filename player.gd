@@ -9,7 +9,9 @@ var there_is_item
 var mask
 var can_rotate
 var nearby_item
+var last_position
 var animation
+signal door
 @onready var attack_timer = $Timer
 func _ready():
 	mask = 0
@@ -20,6 +22,8 @@ func _ready():
 	
 func _process(delta):
 	## Local Movement Logic
+	last_position = position
+	print(last_position)
 	velocity = Vector2.ZERO
 	var W= _movement_axis()[0]
 	var Wn = _movement_axis()[1]
@@ -61,9 +65,10 @@ func _process(delta):
 		allow_movement = true
 		can_rotate = true
 	
-	## Pickup mask
+
 	if Input.is_action_just_pressed("e"):
 		if nearby_item != null:
+			## Pickup mask
 			if nearby_item.is_in_group("masks"):
 				$AnimationPlayer.play("take mask")
 				animation = true
@@ -75,7 +80,12 @@ func _process(delta):
 				mask = nearby_item.mask
 				nearby_item.queue_free()
 				nearby_item = null
-
+			## Open Close Door
+		if nearby_item != null:
+			if nearby_item.is_in_group("doors"):
+				print("signal emited")
+				emit_signal("door")
+			
 func _movement_axis():
 	var AB = Vector2(position.x + cos(rotation), position.y) - position
 	var BC = Vector2(position.x + cos(rotation), position.y + sin(rotation)) - Vector2(position.x + cos(rotation), position.y)
@@ -86,6 +96,9 @@ func _movement_axis():
 
 func _on_area_entered(area: Area2D) -> void:
 	nearby_item = area
+	if area.is_in_group("doors"):
+		position -= velocity * force * 2.5
+		velocity = Vector2.ZERO
 
 
 func _on_area_exited(area: Area2D) -> void:

@@ -1,65 +1,53 @@
-extends Area2D
-var objective
-var velocity = Vector2(0, 0)
-var W
-var times_played
+extends RigidBody2D
 var allow_movement
-var animation_rotation
+var objective
+var times_played
+var route
 var i
-var health
+var following_object
 var mask
 var can_see
-var route = [Vector2(0, 0), Vector2(500, 500), Vector2(1000, 0)]
-@onready var forget = $forget
+signal door(door_name)
 func _ready():
+	i = 0
 	times_played = 0
 	allow_movement = true
-	i = 0
-	health = 5
+	sleeping = false
+	route = [Vector2(460, 0), Vector2(500, 500)]
 	mask = 1
 	can_see = true
-	
-	
-func _process(delta):
-	## Know if there is something blocking vision
-	can_see = true
-	if $RayCast2D.is_colliding() == true:
+
+func _physics_process(delta):
+	if mask == 1:
+		$AnimatedSprite2D.frame = 0
+		
+	if $RayCast2D.get_collider() != null:
+		if $RayCast2D.get_collider().is_in_group("doors"):
+			if $RayCast2D.get_collider().open == false:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+				emit_signal("door", $RayCast2D.get_collider().name)
 		if $RayCast2D.get_collider().is_in_group("wall"):
 			can_see = false
-	## Movement forward
-	if health <= 0:
-		var mask_instance = load("res://mask.tscn").instantiate()
-		mask_instance.position = position
-		mask_instance.mask = mask
-		add_sibling(mask_instance)
-		queue_free()
-	W = _movement_axis()[0]
-	velocity += W.normalized()
-	velocity = velocity.normalized()
-	if allow_movement == true:
-		position += velocity * 7
-
-	# Animate rotation
-	rotation += get_node("rotator").rotation / 7
-	if objective != null:
-		if position.distance_to(objective) < 10:
-			if times_played <= 1:
-				if not $AnimationPlayer.is_playing():
-					$AnimationPlayer.play("looking_around")
-					allow_movement = false
-			else:
-				follow_path()
-				allow_movement = true
-				$AnimationPlayer.stop()
 		else:
-			look_at(objective)
-
-func _on_lantern_area_entered(area: Area2D) -> void:
-	if area.is_in_group("objectives") and area.mask != mask and can_see == true:
-		objective = area.position
-		times_played = 0
-		$AnimationPlayer.stop(true)
-		allow_movement = true
+			can_see = true
+	if following_object != null:
+		objective = following_object.get_parent().position
+	if objective != null:
+		look_at(objective)
+		if position.distance_to(objective) < 10:
+			if times_played < 2:
+				allow_movement = false
+				linear_velocity = Vector2(0, 0)
+				if $AnimationPlayer.is_playing() == false:
+					$AnimationPlayer.play("looking_around")
+			if times_played >= 2:
+				follow_path()
+	else:
+		follow_path()
+	if allow_movement == true:
+		var W = _movement_axis()[0]
+		linear_velocity = 300 * W.normalized()
+	else:
+		linear_velocity = Vector2(0, 0)
 
 func _movement_axis():
 	var AB = Vector2(position.x + cos(rotation), position.y) - position
@@ -67,29 +55,25 @@ func _movement_axis():
 	var W = AB + BC
 	return [W, Vector2(-W.y, W.x)]
 
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	allow_movement = true
-
-	
-func _on_lantern_area_exited(area: Area2D) -> void:
-	if area.is_in_group("objectives") and area.mask != mask:
-		print(area.mask)
-		forget.start()
-
-func _on_periferal_vision_area_entered(area: Area2D) -> void:
-	if area.is_in_group("objectives") and forget.time_left < 0.2 and area.mask != mask:
-		objective = area.position
-		$AnimationPlayer.stop()
-		allow_movement = true
-
 func follow_path():
 	times_played = 0
+	allow_movement = true
 	objective = route[i]
 	i += 1
-	if i >= len(route):
+	if i > len(route) - 1:
 		i = 0
 
 
-func _on_animation_player_animation_started(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	times_played += 1
+
+
+func _on_lantern_area_entered(area: Area2D) -> void:
+	if area.is_in_group("objectives") and area.get_parent().mask < mask and can_see == true:
+		following_object = area
+		allow_movement = true
+func _on_lantern_area_exited(area: Area2D) -> void:
+	if area.is_in_group("objectives") and can_see == true:
+		if following_object != null:
+			objective = following_object.get_parent().position
+			following_object = null

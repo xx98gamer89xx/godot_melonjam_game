@@ -21,6 +21,8 @@ objectives=""
 masks=""
 doors=""
 openers=""
+enemy=""
+wall=""
 
 [input]
 

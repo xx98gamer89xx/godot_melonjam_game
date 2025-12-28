@@ -1,0 +1,11 @@
+	if allow_movement:
+		# Primero gira para mirar al objetivo
+		if objective != null and objective != Vector2.ZERO:
+			look_at(objective)
+		
+		# Vector hacia adelante basado en rotación actual
+		var forward = Vector2(cos(rotation), sin(rotation)).normalized()
+		linear_velocity = forward * 500
+		print("Moviéndose:", linear_velocity)
+	else:
+		linear_velocity = Vector2.ZERO

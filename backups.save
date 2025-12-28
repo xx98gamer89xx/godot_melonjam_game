@@ -1,0 +1,80 @@
+extends RigidBody2D
+var objective : Vector2 = Vector2.ZERO
+var velocity = Vector2.ZERO
+var times_played = 0
+var allow_movement = true
+var i = 0
+var health = 5
+var mask = 1
+var can_see = true
+var route = [Vector2(0, 0), Vector2(500, 500), Vector2(1000, 0)]
+
+@onready var rotator = $rotator  # Así se declara para usar en todo el script
+
+func _ready():
+	times_played = 0
+	allow_movement = true
+	i = 0
+	health = 5
+	mask = 1
+	can_see = true
+	follow_path()
+
+func _process(delta):
+	rotation += rotator.rotation
+	if $RayCast2D.get_collider() != null:
+		if $RayCast2D.get_collider().is_in_group("wall"):
+			can_see = false
+		else:
+			can_see = true
+
+func _physics_process(delta):
+	sleeping = false
+	# Seguir el objetivo
+	if allow_movement == true:
+		# Primero gira para mirar al objetivo
+		if objective != null:
+			look_at(objective)
+			# Vector hacia adelante basado en rotación actual
+			var forward = Vector2(cos(rotation), sin(rotation)).normalized()
+			linear_velocity = forward * 500
+
+		else:
+			follow_path()
+	if position.distance_to(objective) < 10:
+		if times_played < 2:
+			allow_movement = false
+			linear_velocity = Vector2.ZERO
+			if $AnimationPlayer.is_playing() == false:
+				$AnimationPlayer.play("looking_around")
+		else:
+			if $AnimationPlayer.is_playing() == true:
+				$AnimationPlayer.stop()
+			allow_movement = true
+			times_played = 0
+			follow_path()
+
+func _movement_axis():
+	var AB = Vector2(position.x + cos(rotation), position.y) - position
+	var BC = Vector2(position.x + cos(rotation), position.y + sin(rotation)) - Vector2(position.x + cos(rotation), position.y)
+	var W = AB + BC
+	return [W, Vector2(-W.y, W.x)]
+
+func _on_lantern_area_entered(area: Area2D) -> void:
+	if area.is_in_group("objectives") and can_see == true:
+		$AnimationPlayer.stop()
+		allow_movement = true
+		times_played = 0
+		objective = area.get_parent().position
+
+func _on_lantern_area_exited(area: Area2D) -> void:
+	pass
+
+func follow_path():
+	objective = route[i]
+	i += 1
+	if i > len(route) - 1:
+		i = 0
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	times_played += 1

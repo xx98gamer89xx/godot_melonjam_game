@@ -83,7 +83,7 @@ func objectives():
 		follow_path()
 func die():
 	var mask_instance = load("res://mask.tscn").instantiate()
-	mask_instance.mask = mask
+	mask_instance.mask = mask 
 	mask_instance.position = position
 	add_sibling(mask_instance)
 	var body_instance = load("res://dead.tscn").instantiate()

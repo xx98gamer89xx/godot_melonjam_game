@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://xojm1suggl30"]
 
 [ext_resource type="Script" uid="uid://cprn7hum03f5i" path="res://doorç.gd" id="1_gptku"]
-[ext_resource type="Texture2D" uid="uid://bwbgof5cirijy" path="res://sprites/puerta.png" id="2_gptku"]
+[ext_resource type="Texture2D" uid="uid://dj72x1og2ewnv" path="res://sprites/puerta.png" id="2_gptku"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pd5vr"]
-size = Vector2(51, 20)
+size = Vector2(51, 31.666668)
 
 [sub_resource type="Animation" id="Animation_0phs7"]
 length = 0.001
@@ -95,7 +95,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gptku"]
-size = Vector2(48, 42)
+size = Vector2(48, 62.000004)
 
 [node name="door_1" type="StaticBody2D" groups=["doors", "wall"]]
 scale = Vector2(3, 3)
@@ -117,4 +117,5 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="." groups=["doors"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.33333302)
 shape = SubResource("RectangleShape2D_gptku")

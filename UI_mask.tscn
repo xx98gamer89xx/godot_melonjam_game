@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp54h6v3lmeso"]
+
+[ext_resource type="Script" uid="uid://l7xrsk15u4uk" path="res://mask_ui.gd" id="1_kgp6n"]
+[ext_resource type="Texture2D" uid="uid://dygrbshh4uh2c" path="res://sprites/marco.png" id="2_avlna"]
+
+[node name="mask" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kgp6n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(118, 102)
+scale = Vector2(2.3366683, 2.5951307)
+texture = ExtResource("2_avlna")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 231.0
+offset_bottom = 231.0

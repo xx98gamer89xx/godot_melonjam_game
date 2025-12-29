@@ -3,7 +3,7 @@ extends RigidBody2D
 var velocity = Vector2.ZERO
 var max_velocity = 2000
 var force = 1000
-var gun = load("res://item.tscn")
+var gun = load("res://knife.tscn")
 var allow_movement = true
 var there_is_item = false
 var mask
@@ -11,15 +11,15 @@ var can_rotate = true
 var nearby_item = null
 var animation = false
 signal door(door_name)
+var health
 @onready var attack_timer = $Timer
 
 func _ready():
 	mask = 0
+	health = 5
 func _physics_process(delta):
-	if mask == 0:
-		$Node2D.get_child(0).frame = 0
-	if mask == 1:
-		$Node2D.get_child(0).frame = 1
+	if health <= 0:
+		you_died()
 	# Reset velocity
 	velocity = Vector2.ZERO
 
@@ -55,6 +55,7 @@ func _physics_process(delta):
 		gun_instance.position = Vector2(100, 0)
 		if not there_is_item:
 			add_child(gun_instance)
+			mask += 1
 
 	# Chequeo de items en children
 	there_is_item = false
@@ -76,6 +77,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("e") and nearby_item != null:
 		if nearby_item.is_in_group("masks"):
 			$AnimationPlayer.play("take mask")
+			mask += 1
 			animation = true
 			var mask_instance = preload("res://mask.tscn").instantiate()
 			mask_instance.position = nearby_item.position
@@ -96,6 +98,10 @@ func _movement_axis():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	animation = false
+	mask -= 1
+
+func you_died():
+	queue_free()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	nearby_item = area

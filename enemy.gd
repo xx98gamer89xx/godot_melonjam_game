@@ -7,6 +7,8 @@ var i
 var following_object
 var mask
 var can_see
+var attacking
+var health
 signal door(door_name)
 func _ready():
 	i = 0
@@ -14,13 +16,11 @@ func _ready():
 	allow_movement = true
 	sleeping = false
 	route = [Vector2(460, 0), Vector2(500, 500)]
-	mask = 1
+	mask = 3
 	can_see = true
+	health = 5
 
-func _physics_process(delta):
-	if mask == 1:
-		$AnimatedSprite2D.frame = 0
-		
+func raycast():
 	if $RayCast2D.get_collider() != null:
 		if $RayCast2D.get_collider().is_in_group("doors"):
 			if $RayCast2D.get_collider().open == false:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
@@ -29,8 +29,17 @@ func _physics_process(delta):
 			can_see = false
 		else:
 			can_see = true
-	if following_object != null:
-		objective = following_object.get_parent().position
+		if $RayCast2D.get_collider().is_in_group("objectives"):
+			attack()
+
+func allowing_movement():
+	if allow_movement == true:
+		var W = _movement_axis()[0]
+		linear_velocity = 300 * W.normalized()
+	else:
+		linear_velocity = Vector2(0, 0)
+
+func objectives():
 	if objective != null:
 		look_at(objective)
 		if position.distance_to(objective) < 10:
@@ -43,11 +52,22 @@ func _physics_process(delta):
 				follow_path()
 	else:
 		follow_path()
-	if allow_movement == true:
-		var W = _movement_axis()[0]
-		linear_velocity = 300 * W.normalized()
-	else:
-		linear_velocity = Vector2(0, 0)
+func die():
+	var mask_instance = load("res://mask.tscn").instantiate()
+	mask_instance.mask = mask
+	mask_instance.position = position
+	add_sibling(mask_instance)
+	queue_free()
+func _physics_process(delta):
+	if health <= 0:
+		die()
+	if mask == 1:
+		$AnimatedSprite2D.frame = 0		
+	raycast()
+	if following_object != null:
+		objective = following_object.get_parent().position
+	objectives()
+	allowing_movement()
 
 func _movement_axis():
 	var AB = Vector2(position.x + cos(rotation), position.y) - position
@@ -63,13 +83,18 @@ func follow_path():
 	if i > len(route) - 1:
 		i = 0
 
+func attack():
+	allow_movement = false
+	if attacking != null:
+		attacking.get_parent().health -= 5
+	allow_movement = true
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	times_played += 1
 
 
 func _on_lantern_area_entered(area: Area2D) -> void:
-	if area.is_in_group("objectives") and area.get_parent().mask < mask and can_see == true:
+	if area.is_in_group("objectives") and area.get_parent().mask < mask and can_see == true and area.name == "enemy_collider":
 		following_object = area
 		allow_movement = true
 func _on_lantern_area_exited(area: Area2D) -> void:
@@ -77,3 +102,12 @@ func _on_lantern_area_exited(area: Area2D) -> void:
 		if following_object != null:
 			objective = following_object.get_parent().position
 			following_object = null
+
+
+func _on_attack_area_entered(area: Area2D) -> void:
+	if area.is_in_group("objectives"):
+		attacking = area
+
+func _on_attack_area_exited(area: Area2D) -> void:
+	if area.is_in_group("objectives"):
+		attacking = null

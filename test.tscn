@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bojnj7e2ho4pg"]
+[gd_scene load_steps=6 format=3 uid="uid://bojnj7e2ho4pg"]
 
 [ext_resource type="PackedScene" uid="uid://cqrhrkw58kpta" path="res://mask.tscn" id="3_6uqi0"]
 [ext_resource type="PackedScene" uid="uid://cfdffu266polt" path="res://player_1.tscn" id="3_ppyta"]
 [ext_resource type="PackedScene" uid="uid://xojm1suggl30" path="res://door_1.tscn" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://vqyjihahkvxv" path="res://enemy_1.tscn" id="4_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://cp54h6v3lmeso" path="res://UI_mask.tscn" id="5_ykrsh"]
 
 [node name="test" type="Node2D"]
 
@@ -18,3 +19,11 @@ rotation = -0.07799771
 position = Vector2(462, 76)
 
 [node name="RigidBody2D" parent="." instance=ExtResource("3_ppyta")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mask" parent="CanvasLayer" instance=ExtResource("5_ykrsh")]
+offset_left = -20.0
+offset_top = 406.0
+offset_right = 20.0
+offset_bottom = 446.0

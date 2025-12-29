@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vqyjihahkvxv"]
+[gd_scene load_steps=11 format=3 uid="uid://vqyjihahkvxv"]
 
 [ext_resource type="Script" uid="uid://wj56ls0c5icn" path="res://enemy.gd" id="1_663o1"]
 [ext_resource type="Texture2D" uid="uid://lls07qth02ij" path="res://sprites/enemigo mascara kitsune ojos azules-export.png" id="2_663o1"]
@@ -82,6 +82,9 @@ _data = {
 &"looking_around": SubResource("Animation_4gyqm")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_663o1"]
+size = Vector2(50, 98)
+
 [node name="enemy_1" type="RigidBody2D" groups=["enemy", "openers"]]
 gravity_scale = 0.0
 can_sleep = false
@@ -121,7 +124,15 @@ one_shot = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(120, 0)
 
+[node name="attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+position = Vector2(87, 2)
+shape = SubResource("RectangleShape2D_663o1")
+
 [connection signal="area_entered" from="lantern" to="." method="_on_lantern_area_entered"]
 [connection signal="area_exited" from="lantern" to="." method="_on_lantern_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
+[connection signal="area_entered" from="attack" to="." method="_on_attack_area_entered"]
+[connection signal="area_exited" from="attack" to="." method="_on_attack_area_exited"]

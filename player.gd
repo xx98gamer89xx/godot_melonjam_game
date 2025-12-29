@@ -100,7 +100,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	mask -= 1
 
 func you_died():
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	get_tree().reload_current_scene()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("masks") or area.is_in_group("doors"):

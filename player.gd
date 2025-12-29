@@ -6,16 +6,14 @@ var force = 1000
 var gun = load("res://knife.tscn")
 var allow_movement = true
 var there_is_item = false
-var mask
 var can_rotate = true
 var nearby_item = null
 var animation = false
 signal door(door_name)
 var health
 @onready var attack_timer = $Timer
-
+@export var mask: int
 func _ready():
-	mask = 0
 	health = 5
 	z_index = 10
 func _physics_process(delta):

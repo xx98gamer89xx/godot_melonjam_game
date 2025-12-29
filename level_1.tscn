@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=4 uid="uid://c0rxvbbs2w3jf"]
+[gd_scene load_steps=18 format=4 uid="uid://c0rxvbbs2w3jf"]
 
+[ext_resource type="PackedScene" uid="uid://uouma3edymgc" path="res://win.tscn" id="2_gyffv"]
 [ext_resource type="PackedScene" uid="uid://cfdffu266polt" path="res://player_1.tscn" id="2_hn12h"]
 [ext_resource type="Texture2D" uid="uid://dlw2d7vmlvrft" path="res://sprites/meta.png" id="3_1pe0h"]
 [ext_resource type="PackedScene" uid="uid://bwuat76q8g570" path="res://wall.tscn" id="3_ihfcg"]
@@ -216,6 +217,9 @@ texture_filter = 1
 position = Vector2(10.000006, -3204)
 scale = Vector2(15.366667, 11.883332)
 texture = ExtResource("3_1pe0h")
+
+[node name="win" parent="." instance=ExtResource("2_gyffv")]
+position = Vector2(12, -3192)
 
 [connection signal="area_entered" from="puerta_1" to="puerta_1" method="_on_area_entered"]
 [connection signal="area_entered" from="puerta_2" to="puerta_2" method="_on_area_entered"]

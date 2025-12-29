@@ -121,12 +121,12 @@ position = Vector2(342.00003, -1264)
 rotation = 1.5707964
 scale = Vector2(3.3, 1.7)
 
-[node name="enemy_1" parent="." instance=ExtResource("4_rqrji")]
-position = Vector2(-592, -571)
-route = [Vector2(174, -510), Vector2(149, -230), Vector2(-590, -230)]
-mask = 9
-
 [node name="RigidBody2D" parent="." instance=ExtResource("5_8x87a")]
 position = Vector2(493, 219)
 rotation = 4.712389
 mask = 7
+
+[node name="enemy_1" parent="." instance=ExtResource("4_rqrji")]
+position = Vector2(-607, -592)
+route = [Vector2(-607, -592), Vector2(0, 0)]
+mask = 9

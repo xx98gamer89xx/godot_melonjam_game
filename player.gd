@@ -79,10 +79,11 @@ func _physics_process(delta):
 			$AnimationPlayer.play("take mask")
 			mask += 1
 			animation = true
-			var mask_instance = preload("res://mask.tscn").instantiate()
-			mask_instance.position = nearby_item.position
-			mask_instance.mask = mask
-			add_sibling(mask_instance)
+			if mask > 1:
+				var mask_instance = preload("res://mask.tscn").instantiate()
+				mask_instance.position = nearby_item.position
+				mask_instance.mask = mask
+				add_sibling(mask_instance)
 			mask = nearby_item.mask
 			nearby_item.queue_free()
 			nearby_item = null
@@ -101,7 +102,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	mask -= 1
 
 func you_died():
-	queue_free()
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	nearby_item = area

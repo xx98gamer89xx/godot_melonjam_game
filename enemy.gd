@@ -16,9 +16,40 @@ func _ready():
 	allow_movement = true
 	sleeping = false
 	route = [Vector2(460, 0), Vector2(500, 500)]
-	mask = 3
+	mask = 7
 	can_see = true
 	health = 5
+	change_mask()
+
+func change_mask():
+	if mask == 3:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara kitsune ojos azules-export.png")
+	if mask == 4:
+		$Sprite2D.texture = load("res://sprites/enemigo kitsune azul cuchillada - copia - copia.png")
+	if mask == 5:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara kitsune verde.png")
+	if mask == 6:
+		$Sprite2D.texture = load("res://sprites/enemigo kitsune verde cuchillada - copia - copia.png")
+	if mask == 7:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara kitsune rosa - copia.png")
+	if mask == 8:
+		$Sprite2D.texture = load("res://sprites/enemigo kitsune rosa cuchillada.png")
+	if mask == 9:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara oni azul - copia - copia.png")
+	if mask == 10:
+		$Sprite2D.texture = load("res://sprites/enemigo oni azul cuchillada.png")
+	if mask == 11:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara oni verde - copia - copia.png")
+	if mask == 12:
+		$Sprite2D.texture = load("res://sprites/enemigo oni verde cuchillada.png")
+	if mask == 13:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara oni rosa - copia - copia.png")
+	if mask == 14:
+		$Sprite2D.texture = load("res://sprites/enemigo oni rosa cuchillada.png")
+	if mask == 15:
+		$Sprite2D.texture = load("res://sprites/enemigo mascara samurai.png")
+	if mask == 16:
+		$Sprite2D.texture = load("res://sprites/enemigo samurai cuchillada.png")
 
 func raycast():
 	if $RayCast2D.get_collider() != null:

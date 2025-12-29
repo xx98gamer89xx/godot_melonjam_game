@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://c37ercqdjyd3p"]
+
+[ext_resource type="Script" uid="uid://dbaqlm80bfcge" path="res://continue.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://pkr32o0hobp2" path="res://exit.gd" id="2_7vrkn"]
+
+[sub_resource type="SystemFont" id="SystemFont_7vrkn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fu7sn"]
+font = SubResource("SystemFont_7vrkn")
+font_size = 14
+
+[node name="Main menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9976463, 1.0062836)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(5.44, 9.64)
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+text = "Kill the samurai"
+label_settings = SubResource("LabelSettings_fu7sn")
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Continue"
+script = ExtResource("1_06t4h")
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Exit
+"
+script = ExtResource("2_7vrkn")
+
+[connection signal="button_down" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_button_down"]
+[connection signal="button_down" from="VBoxContainer/Button2" to="VBoxContainer/Button" method="_on_button_2_button_down"]

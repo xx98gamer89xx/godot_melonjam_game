@@ -59,7 +59,8 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="." groups=["openers"]]
-scale = Vector2(1.64, 1.64)
+position = Vector2(82, 0)
+scale = Vector2(0.92000306, 0.92000306)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_bxx23")

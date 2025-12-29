@@ -3,7 +3,6 @@ var player
 func _ready():
 	for node in get_parent().get_parent().get_children():
 		if node.name == "RigidBody2D":
-			print(node.name)
 			player = node
 
 func _process(delta):

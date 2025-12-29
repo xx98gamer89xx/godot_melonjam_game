@@ -114,7 +114,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_50cdl")
 }
 
-[node name="Area2D" type="Area2D" parent="." groups=["doors"]]
+[node name="Area2D" type="Area2D" parent="." groups=["doors", "wall"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 0.33333302)

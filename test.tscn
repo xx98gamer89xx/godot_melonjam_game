@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bojnj7e2ho4pg"]
+[gd_scene load_steps=5 format=3 uid="uid://bojnj7e2ho4pg"]
 
 [ext_resource type="PackedScene" uid="uid://cfdffu266polt" path="res://player_1.tscn" id="3_ppyta"]
 [ext_resource type="PackedScene" uid="uid://xojm1suggl30" path="res://door_1.tscn" id="4_ppyta"]
+[ext_resource type="PackedScene" uid="uid://vqyjihahkvxv" path="res://enemy_1.tscn" id="4_ykrsh"]
 [ext_resource type="PackedScene" uid="uid://bwuat76q8g570" path="res://wall.tscn" id="7_vbegm"]
 
 [node name="test" type="Node2D"]
@@ -10,6 +11,7 @@
 position = Vector2(462, 76)
 
 [node name="RigidBody2D" parent="." instance=ExtResource("3_ppyta")]
+position = Vector2(508, -135)
 
 [node name="StaticBody2D" parent="." instance=ExtResource("7_vbegm")]
 position = Vector2(560, 57)
@@ -17,5 +19,14 @@ position = Vector2(560, 57)
 [node name="StaticBody2D2" parent="." instance=ExtResource("7_vbegm")]
 position = Vector2(161, 62)
 
+[node name="StaticBody2D3" parent="." instance=ExtResource("7_vbegm")]
+position = Vector2(161, 62)
+rotation = -1.5805149
+
 [node name="door_2" parent="." instance=ExtResource("4_ppyta")]
 position = Vector2(508, 415)
+
+[node name="enemy_1" parent="." instance=ExtResource("4_ykrsh")]
+position = Vector2(-42, 70)
+route = [Vector2(0, 0), Vector2(0, 200)]
+mask = 3

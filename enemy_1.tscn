@@ -110,7 +110,7 @@ libraries = {
 one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(120, 0)
+target_position = Vector2(112, -1)
 
 [node name="attack" type="Area2D" parent="."]
 
@@ -130,9 +130,16 @@ offset = Vector2(5, 8)
 position = Vector2(-14.25, 0)
 shape = SubResource("RectangleShape2D_ovk8a")
 
+[node name="pared" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="pared"]
+polygon = PackedVector2Array(95, 21, 390, -33, 391, 65)
+
 [connection signal="area_entered" from="lantern" to="." method="_on_lantern_area_entered"]
 [connection signal="area_exited" from="lantern" to="." method="_on_lantern_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="area_entered" from="attack" to="." method="_on_attack_area_entered"]
 [connection signal="area_exited" from="attack" to="." method="_on_attack_area_exited"]
+[connection signal="area_entered" from="pared" to="." method="_on_pared_area_entered"]
+[connection signal="area_exited" from="pared" to="." method="_on_pared_area_exited"]

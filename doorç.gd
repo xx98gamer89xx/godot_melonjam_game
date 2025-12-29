@@ -13,7 +13,6 @@ func _process(delta):
 
 func _door(door_name):
 	if door_name == name:
-		print("Soy yo")
 		if open == false:
 			$AnimationPlayer.play("opening")
 			open = true

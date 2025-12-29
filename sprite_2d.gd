@@ -1,7 +1,6 @@
 extends Sprite2D
 func _process(delta):
 	var mask = get_parent().get_parent().mask
-	print(mask)
 	if mask == 0:
 		texture = load("res://sprites/prota sin mascara.png")
 	if mask == 1:

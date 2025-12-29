@@ -1,18 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwuat76q8g570"]
+[gd_scene load_steps=4 format=3 uid="uid://bwuat76q8g570"]
 
 [ext_resource type="Texture2D" uid="uid://ctkrvaft2tbd4" path="res://sprites/pared.png" id="1_xxgf6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4f30"]
 size = Vector2(222, 54)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxgf6"]
+size = Vector2(236, 53)
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["wall"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(101, 17)
 shape = SubResource("RectangleShape2D_y4f30")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["wall"]]
 texture_filter = 1
 position = Vector2(102, 17)
 scale = Vector2(2, 3.88)
 texture = ExtResource("1_xxgf6")
+
+[node name="Area2D" type="Area2D" parent="." groups=["wall"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(102, 16.5)
+shape = SubResource("RectangleShape2D_xxgf6")

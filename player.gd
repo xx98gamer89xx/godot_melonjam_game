@@ -89,7 +89,6 @@ func _physics_process(delta):
 			nearby_item.queue_free()
 			nearby_item = null
 		elif nearby_item.is_in_group("doors"):
-			print(nearby_item.get_parent())
 			emit_signal("door", nearby_item.get_parent().name)
 
 func _movement_axis():
@@ -106,7 +105,8 @@ func you_died():
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	nearby_item = area
+	if area.is_in_group("masks") or area.is_in_group("doors"):
+		nearby_item = area
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area == nearby_item:

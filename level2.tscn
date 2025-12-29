@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://lxgnqm5l30yv"]
+[gd_scene load_steps=16 format=3 uid="uid://lxgnqm5l30yv"]
 
 [ext_resource type="PackedScene" uid="uid://bwuat76q8g570" path="res://wall.tscn" id="1_6q4t8"]
 [ext_resource type="Script" uid="uid://b63tnohy2vsfu" path="res://win.gd" id="1_21xmu"]
@@ -6,10 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://xojm1suggl30" path="res://door_1.tscn" id="3_r6vdu"]
 [ext_resource type="PackedScene" uid="uid://vqyjihahkvxv" path="res://enemy_1.tscn" id="4_8tcn8"]
 [ext_resource type="PackedScene" uid="uid://uouma3edymgc" path="res://win.tscn" id="6_8i3m3"]
+[ext_resource type="Script" uid="uid://chsuq72vosvn" path="res://win_2.gd" id="7_3opl0"]
 [ext_resource type="PackedScene" uid="uid://cp54h6v3lmeso" path="res://UI_mask.tscn" id="7_8i3m3"]
 [ext_resource type="Texture2D" uid="uid://2dkjcxm0ogau" path="res://sprites/posible suelo interior.png" id="8_rmy57"]
 [ext_resource type="Texture2D" uid="uid://sfm8d3d2xktp" path="res://sprites/suelo exterior.png" id="9_jifot"]
 [ext_resource type="Script" uid="uid://ctmugnptpqojp" path="res://tile_map.gd" id="9_qulpo"]
+[ext_resource type="Texture2D" uid="uid://dlw2d7vmlvrft" path="res://sprites/meta.png" id="12_dc5vx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rmy57"]
 texture = ExtResource("8_rmy57")
@@ -296,6 +298,7 @@ mask = 5
 [node name="win" parent="." instance=ExtResource("6_8i3m3")]
 position = Vector2(657.99994, -2776.0002)
 scale = Vector2(5, 5)
+script = ExtResource("7_3opl0")
 
 [node name="enemy_11" parent="." instance=ExtResource("4_8tcn8")]
 position = Vector2(609, -1910)
@@ -353,3 +356,9 @@ script = ExtResource("9_qulpo")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
 tile_set = SubResource("TileSet_qulpo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(688, -2636)
+scale = Vector2(5, 5)
+texture = ExtResource("12_dc5vx")

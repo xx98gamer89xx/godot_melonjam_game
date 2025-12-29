@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://4bvkf4jt0x1e"]
+[gd_scene load_steps=5 format=3 uid="uid://bsrl1ickw7m7i"]
 
 [ext_resource type="PackedScene" uid="uid://bwuat76q8g570" path="res://wall.tscn" id="2_mu84n"]
 [ext_resource type="PackedScene" uid="uid://xojm1suggl30" path="res://door_1.tscn" id="3_bmsap"]
@@ -122,8 +122,9 @@ rotation = 1.5707964
 scale = Vector2(3.3, 1.7)
 
 [node name="enemy_1" parent="." instance=ExtResource("4_rqrji")]
-position = Vector2(-595, -602)
-route = [Vector2(400, 400)]
+position = Vector2(-592, -571)
+route = [Vector2(174, -510), Vector2(149, -230), Vector2(-590, -230)]
+mask = 9
 
 [node name="RigidBody2D" parent="." instance=ExtResource("5_8x87a")]
 position = Vector2(493, 219)

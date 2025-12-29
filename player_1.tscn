@@ -1,22 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfdffu266polt"]
+[gd_scene load_steps=9 format=3 uid="uid://cfdffu266polt"]
 
 [ext_resource type="Script" uid="uid://cltgkvcslsnev" path="res://player.gd" id="1_bxx23"]
-[ext_resource type="Texture2D" uid="uid://w8ap773lbgut" path="res://sprites/prota sin mascara.png" id="2_bxx23"]
-[ext_resource type="Texture2D" uid="uid://cpdsnud48dlh5" path="res://sprites/prota mascara kitsune ojos azules.png" id="3_qh3su"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bxx23"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_bxx23")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_qh3su")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://bdwfmvnt7hivq" path="res://sprites/prota mascara kitsune azul cuchillada.png" id="2_bxx23"]
+[ext_resource type="Script" uid="uid://b5f23kdts8y4f" path="res://sprite_2d.gd" id="3_qh3su"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_buxg0"]
 size = Vector2(116, 120)
@@ -26,6 +12,18 @@ length = 0.001
 
 [sub_resource type="Animation" id="Animation_onrkg"]
 resource_name = "take mask"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
@@ -36,19 +34,19 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_bxx23"]
 radius = 64.12488
 
-[node name="RigidBody2D" type="RigidBody2D" groups=["openers"]]
+[node name="RigidBody2D" type="RigidBody2D" groups=["objectives", "openers"]]
 gravity_scale = 0.0
 script = ExtResource("1_bxx23")
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 texture_filter = 1
-texture_repeat = 1
-position = Vector2(0.86276245, 0.11133194)
-scale = Vector2(3.68, 3.68)
-sprite_frames = SubResource("SpriteFrames_bxx23")
-offset = Vector2(3.5699015, 9.752356)
+position = Vector2(0, -1)
+scale = Vector2(3.84, 3.84)
+texture = ExtResource("2_bxx23")
+offset = Vector2(5, 8)
+script = ExtResource("3_qh3su")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_buxg0")
@@ -67,9 +65,15 @@ scale = Vector2(1.64, 1.64)
 shape = SubResource("CircleShape2D_bxx23")
 
 [node name="enemy_collider" type="Area2D" parent="." groups=["objectives", "openers"]]
+scale = Vector2(0.7999992, 0.7999992)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy_collider"]
 shape = SubResource("CircleShape2D_bxx23")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(19.400002, 78.37601)
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

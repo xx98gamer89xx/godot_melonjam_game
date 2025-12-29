@@ -11,7 +11,7 @@ func _process(delta):
 	if mask == 3:
 		texture = load("res://sprites/prota mascara kitsune azul cuchillada.png")
 	if mask == 4:
-		texture = load("res://sprites/prota kitsune ojos verdes.png")
+		texture = load("res://sprites/prota mascara kitsune ojos verdes.png")
 	if mask == 5:
 		texture = load("res://sprites/prota mascara kitsune verde cuchillada.png")
 	if mask == 6:

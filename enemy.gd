@@ -2,10 +2,10 @@ extends RigidBody2D
 var allow_movement
 var objective
 var times_played
-var route
+@export var route: Array
+@export var mask: int
 var i
 var following_object
-var mask
 var can_see
 var attacking
 var health
@@ -15,8 +15,6 @@ func _ready():
 	times_played = 0
 	allow_movement = true
 	sleeping = false
-	route = [Vector2(460, 0), Vector2(500, 500)]
-	mask = 7
 	can_see = true
 	health = 5
 	change_mask()
@@ -88,6 +86,11 @@ func die():
 	mask_instance.mask = mask
 	mask_instance.position = position
 	add_sibling(mask_instance)
+	var body_instance = load("res://dead.tscn").instantiate()
+	body_instance.position = Vector2(position.x - 20, position.y)
+	body_instance.rotation = rotation
+	body_instance.z_index = 0
+	add_sibling(body_instance)
 	queue_free()
 func _physics_process(delta):
 	if health <= 0:
@@ -125,7 +128,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_lantern_area_entered(area: Area2D) -> void:
-	if area.is_in_group("objectives") and area.get_parent().mask < mask and can_see == true and area.name == "enemy_collider":
+	if area.is_in_group("objectives") and area.get_parent().mask < mask - 1 and can_see == true and area.name == "enemy_collider":
+		print(area.get_parent().mask)
 		following_object = area
 		allow_movement = true
 func _on_lantern_area_exited(area: Area2D) -> void:
@@ -136,7 +140,8 @@ func _on_lantern_area_exited(area: Area2D) -> void:
 
 
 func _on_attack_area_entered(area: Area2D) -> void:
-	if area.is_in_group("objectives"):
+	if area.is_in_group("objectives") and area.get_parent().mask < mask - 1:
+		print(area.get_parent().mask)
 		attacking = area
 
 func _on_attack_area_exited(area: Area2D) -> void:

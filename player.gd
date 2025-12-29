@@ -17,6 +17,7 @@ var health
 func _ready():
 	mask = 0
 	health = 5
+	z_index = 10
 func _physics_process(delta):
 	if health <= 0:
 		you_died()

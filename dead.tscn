@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bscwl443t8j6r"]
+
+[ext_resource type="Texture2D" uid="uid://580qicn7wgl8" path="res://sprites/muerto.png" id="1_8f3xj"]
+
+[node name="dead" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(4.1618233, 4.1618233)
+texture = ExtResource("1_8f3xj")

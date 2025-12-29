@@ -26,9 +26,9 @@ position = Vector2(462, 76)
 
 [node name="mask" parent="CanvasLayer" instance=ExtResource("5_ykrsh")]
 offset_left = -18.0
-offset_top = 467.0
+offset_top = 407.0
 offset_right = 22.0
-offset_bottom = 507.0
+offset_bottom = 447.0
 
 [node name="win" parent="." instance=ExtResource("6_g14j6")]
 position = Vector2(886, -292)

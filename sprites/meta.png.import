@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj72x1og2ewnv"
-path="res://.godot/imported/puerta.png-f1d53d433d26c9ddc3a4b7d3fe969f48.ctex"
+uid="uid://dlw2d7vmlvrft"
+path="res://.godot/imported/meta.png-9825dc3f02feccfd4ae4b95b5abca1f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/puerta.png"
-dest_files=["res://.godot/imported/puerta.png-f1d53d433d26c9ddc3a4b7d3fe969f48.ctex"]
+source_file="res://sprites/meta.png"
+dest_files=["res://.godot/imported/meta.png-9825dc3f02feccfd4ae4b95b5abca1f2.ctex"]
 
 [params]
 

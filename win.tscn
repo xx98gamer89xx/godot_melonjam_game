@@ -1,9 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://uouma3edymgc"]
 
 [ext_resource type="Script" uid="uid://b63tnohy2vsfu" path="res://win.gd" id="1_hgi8f"]
-[ext_resource type="Texture2D" uid="uid://bcsl2ww1mx4hb" path="res://sprites/meta.png" id="2_hgi8f"]
+[ext_resource type="Texture2D" uid="uid://dlw2d7vmlvrft" path="res://sprites/meta.png" id="2_hgi8f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yblwc"]
+size = Vector2(20, 6.293707)
 
 [node name="win" type="Area2D"]
 script = ExtResource("1_hgi8f")

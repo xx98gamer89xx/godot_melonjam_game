@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://lxgnqm5l30yv"]
+[gd_scene load_steps=7 format=3 uid="uid://lxgnqm5l30yv"]
 
 [ext_resource type="PackedScene" uid="uid://bwuat76q8g570" path="res://wall.tscn" id="1_6q4t8"]
+[ext_resource type="Script" uid="uid://b63tnohy2vsfu" path="res://win.gd" id="1_21xmu"]
 [ext_resource type="PackedScene" uid="uid://cfdffu266polt" path="res://player_1.tscn" id="2_8tcn8"]
 [ext_resource type="PackedScene" uid="uid://xojm1suggl30" path="res://door_1.tscn" id="3_r6vdu"]
 [ext_resource type="PackedScene" uid="uid://vqyjihahkvxv" path="res://enemy_1.tscn" id="4_8tcn8"]
+[ext_resource type="PackedScene" uid="uid://uouma3edymgc" path="res://win.tscn" id="6_8i3m3"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_21xmu")
 metadata/_edit_horizontal_guides_ = [-1879.0]
 
 [node name="StaticBody2D" parent="." instance=ExtResource("1_6q4t8")]
@@ -177,6 +180,10 @@ position = Vector2(1124, -1909)
 rotation = 0.040766537
 route = [Vector2(800, -1600), Vector2(800, -270)]
 mask = 5
+
+[node name="win" parent="." instance=ExtResource("6_8i3m3")]
+position = Vector2(657.99994, -2776.0002)
+scale = Vector2(5, 5)
 
 [node name="enemy_11" parent="." instance=ExtResource("4_8tcn8")]
 position = Vector2(609, -1910)
